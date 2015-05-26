@@ -1,3 +1,5 @@
+$wave-height: <%= waveHeight %>%;
+
 html, body {
  height: 100%;
  width: 100%; 
@@ -9,9 +11,8 @@ body {
   font-family: helvetica;
 }
 
-#text {
+.text {
   text-transform: uppercase;
-  display: block;
   text-align: center;
   width: 100%;
   position: absolute;
@@ -23,24 +24,22 @@ body {
   transform: translate(-50%, -50%);
 }
 
-#status {
+.status {
   font-size: 5em;
-  display: block;
 }
 
-#water-level {
+.water-level {
   position: absolute;
   bottom: 0;
   width: 100%;
   left: 0;
   background: #09c;
   background-image: radial-gradient(white 70%, transparent 87%);
-  background-size:4em 2em;
+  background-size: 4em 2em;
   background-position: -1em -1em;
   background-repeat: repeat-x;
-  max-height: 0;
-  transition: max-height 10s;
-  animation: waves 9s cubic-bezier(0.000, 0.000, 0.480, .8) infinite;
+  animation: waves 9s cubic-bezier(0.000, 0.000, 0.480, .8) infinite,
+    waveraise 7s linear 1 forwards;
 } 
 
 @keyframes waves {
@@ -57,7 +56,15 @@ body {
     background-color: #09c;
     background-size:4em 1.9em;
     background-position: 3em -1em;
-
   }
 }
 
+@keyframes waveraise {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: $wave-height;
+  }
+}
